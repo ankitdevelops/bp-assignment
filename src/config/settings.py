@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
+    "drf_spectacular",
+    "drf_spectacular_sidecar",
     "inventory",
     "account",
 ]
@@ -147,6 +149,7 @@ REST_FRAMEWORK = {
         "rest_framework_simplejwt.authentication.JWTAuthentication",
         "rest_framework.authentication.BasicAuthentication",
     ],
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
 }
 
 SIMPLE_JWT = {
@@ -207,4 +210,11 @@ LOGGING = {
         },
     },
     "loggers": {"": {"level": getenv("LOG_LEVEL"), "handlers": ["file", "console"]}},
+}
+
+SPECTACULAR_SETTINGS = {
+    "TITLE": "Inventory API",
+    "DESCRIPTION": "Assignment Project",
+    "VERSION": "1.0.0",
+    "SERVE_INCLUDE_SCHEMA": False,
 }
