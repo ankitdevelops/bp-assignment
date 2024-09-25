@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     "inventory",
+    "account",
 ]
 
 MIDDLEWARE = [
@@ -178,21 +179,32 @@ CACHES = {
 }
 
 
+# Logging Settings
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
+    "formatters": {
+        "simple": {
+            "format": "{asctime}:{levelname} {message}",
+            "style": "{",
+        },
+        "verbose": {
+            "format": "{asctime}:{levelname} - {name} {module}.py (line {lineno:d}). {message}",
+            "style": "{",
+        },
+    },
     "handlers": {
         "file": {
-            "level": "DEBUG",
             "class": "logging.FileHandler",
-            "filename": "inventory_system.log",
+            "filename": getenv("LOG_FILE"),
+            "level": getenv("LOG_LEVEL"),
+            "formatter": "verbose",
+        },
+        "console": {
+            "class": "logging.StreamHandler",
+            "level": getenv("LOG_LEVEL"),
+            "formatter": "simple",
         },
     },
-    "loggers": {
-        "django": {
-            "handlers": ["file"],
-            "level": "DEBUG",
-            "propagate": True,
-        },
-    },
+    "loggers": {"": {"level": getenv("LOG_LEVEL"), "handlers": ["file", "console"]}},
 }

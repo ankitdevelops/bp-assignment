@@ -46,3 +46,9 @@
     ```sh
     python manage.py runserver
     ```
+
+8. **Run the Tests:**
+   - To execute the test cases, use the following command:
+    ```sh
+    python manage.py test
+    ```

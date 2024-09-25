@@ -181,3 +181,6 @@ pyrightconfig.json
 src/.env
 **/__pycache__
 .env
+
+src/logs/logs.txt
+*logs.txt
